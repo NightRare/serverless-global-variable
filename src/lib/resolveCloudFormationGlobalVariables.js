@@ -1,6 +1,6 @@
 "use strict";
 
-const BbPromise = require("bluebird"),
+const BPromise = require("bluebird"),
   _ = require("lodash");
 
 function listExports(AWS, exports, nextToken) {
@@ -41,7 +41,7 @@ function listStackResources(AWS, resources, nextToken) {
  */
 function resolveCloudFormationGlobalVars(serverless, globalVars) {
   const AWS = serverless.providers.aws;
-  return BbPromise.join(listStackResources(AWS), listExports(AWS)).spread(
+  return BPromise.join(listStackResources(AWS), listExports(AWS)).spread(
     (resources, exports) => {
       function mapValue(value) {
         if (_.isObject(value)) {
@@ -65,7 +65,7 @@ function resolveCloudFormationGlobalVars(serverless, globalVars) {
                   `WARNING: Failed to resolve reference ${value.Ref}`
                 );
               }
-              return BbPromise.resolve(resolved);
+              return BPromise.resolve(resolved);
             }
           } else if (value["Fn::ImportValue"]) {
             const importKey = value["Fn::ImportValue"];
@@ -76,31 +76,31 @@ function resolveCloudFormationGlobalVars(serverless, globalVars) {
                 `WARNING: Failed to resolve import value ${importKey}`
               );
             }
-            return BbPromise.resolve(resolved);
+            return BPromise.resolve(resolved);
           } else if (value["Fn::Join"]) {
             // Join has two Arguments. first the delimiter and second the values
             const delimiter = value["Fn::Join"][0];
             const parts = value["Fn::Join"][1];
-            return BbPromise.map(parts, (v) =>
+            return BPromise.map(parts, (v) =>
               mapValue(v)
             ).then((resolvedParts) => _.join(resolvedParts, delimiter));
           }
         }
 
-        return BbPromise.resolve(value);
+        return BPromise.resolve(value);
       }
 
-      return BbPromise.reduce(
+      return BPromise.reduce(
         _.keys(globalVars),
         (result, key) => {
-          return BbPromise.resolve(mapValue(globalVars[key])).then(
+          return BPromise.resolve(mapValue(globalVars[key])).then(
             (resolved) => {
               process.env.SLS_DEBUG &&
                 serverless.cli.log(
                   `Resolved global variable ${key}: ${JSON.stringify(resolved)}`
                 );
               result[key] = resolved;
-              return BbPromise.resolve(result);
+              return BPromise.resolve(result);
             }
           );
         },

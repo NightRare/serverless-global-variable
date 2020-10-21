@@ -1,6 +1,7 @@
 "use strict";
 
 const _ = require("lodash"),
+  BPromise = require("bluebird"),
   fs = require("fs"),
   path = require("path");
 
@@ -45,7 +46,7 @@ class GlobalVariables {
   }
 
   collectGlobalVars() {
-    return BbPromise.try(() => {
+    return BPromise.try(() => {
       const globalVars = {};
 
       return collectStackOutputs(this.serverless).then((stackOutputs) => {
@@ -76,7 +77,7 @@ class GlobalVariables {
           );
 
         this.globalVariables = globalVars;
-        return BbPromise.resolve();
+        return BPromise.resolve();
       });
     });
   }
@@ -92,7 +93,7 @@ class GlobalVariables {
   }
 
   writeEnvVars() {
-    return BbPromise.try(() => {
+    return BPromise.try(() => {
       const params = _.get(this.serverless, "service.custom.global-variables");
 
       let filename = this.varFileName;
