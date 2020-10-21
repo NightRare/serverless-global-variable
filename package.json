@@ -1,0 +1,28 @@
+{
+  "name": "serverless-global-variables",
+  "version": "0.0.1",
+  "description": "Serverless plugin to export a .json file including variables defined in serverless.yml and exported values from CloudFormation",
+  "main": "src/index.js",
+  "author": "Yuan Yuan",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint 'src/**/*.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NightRare/serverless-global-variables"
+  },
+  "bugs": {
+    "url": "https://github.com/NightRare/serverless-global-variables/issues"
+  },
+  "homepage": "https://github.com/NightRare/serverless-global-variables",
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {},
+  "prettier": {
+    "printWidth": 80,
+    "singleQuote": false
+  }
+}
