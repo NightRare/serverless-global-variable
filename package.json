@@ -1,6 +1,6 @@
 {
   "name": "serverless-global-variables",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Serverless plugin to export a .json file including variables defined in serverless.yml and exported values from CloudFormation",
   "main": "src/index.js",
   "author": "Yuan Yuan",
