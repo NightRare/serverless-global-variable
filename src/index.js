@@ -9,6 +9,7 @@ const collectOfflineEnvVariables = require("./lib/collectOfflineEnvVariables");
 const resolveCloudFormationGlobalVariables = require("./lib/resolveCloudFormationGlobalVariables");
 const collectResourcesOutputs = require("./lib/collectResourcesOutputs");
 const collectStackOutputs = require("./lib/collectStackOutputs");
+const setEnvVariables = require("./lib/setEnvVariables");
 
 class GlobalVariables {
   constructor(serverless, options) {
@@ -64,6 +65,8 @@ class GlobalVariables {
             this.options
           );
           _.assign(globalVars, offlineEnvVars);
+
+          setEnvVariables(this.serverless, offlineEnvVars);
         }
 
         _.assign(
