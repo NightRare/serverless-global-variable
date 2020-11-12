@@ -2,6 +2,7 @@
 
 const BPromise = require("bluebird"),
   _ = require("lodash");
+const chalk = require("chalk");
 
 function listExports(AWS, exports, nextToken) {
   exports = exports || [];
@@ -35,13 +36,12 @@ function listStackResources(AWS, resources, nextToken) {
         `Stack with id ${AWS.naming.getStackName()} does not exist`
       ) {
         console.warn(
-          `{yellow {bold WARNNING: Failed to retrieve Stack Resources of this stack from Cloudformation.}}`
+          chalk`{yellow {bold WARNNING: Failed to retrieve Stack Resources of this stack from Cloudformation.}}`
         );
         console.warn(
-          `{yellow {bold If this stack has not been created before, you need to deploy again to make sure the Outputs of this stack gets injected into this and other depended stacks. }}`
+          chalk`{yellow {bold If this stack has not been created before, you need to deploy again to make sure the Outputs of this stack gets injected into this and other depended stacks. }}`
         );
-      }
-      else throw e;
+      } else throw e;
     })
     .return(resources);
 }

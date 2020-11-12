@@ -21,10 +21,10 @@ function describeStack(AWS, outputs, nextToken) {
         `Stack with id ${AWS.naming.getStackName()} does not exist`
       ) {
         console.warn(
-          `{yellow {bold WARNNING: Failed to retrieve Outputs of this stack from Cloudformation.}}`
+          chalk`{yellow {bold WARNNING: Failed to retrieve Outputs of this stack from Cloudformation.}}`
         );
         console.warn(
-          `{yellow {bold If this stack has not been created before, you need to deploy again to make sure the Outputs of this stack gets injected into this and other depended stacks. }}`
+          chalk`{yellow {bold If this stack has not been created before, you need to deploy again to make sure the Outputs of this stack gets injected into this and other depended stacks. }}`
         );
       } else throw e;
     })
