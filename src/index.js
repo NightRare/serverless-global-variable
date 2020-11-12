@@ -33,8 +33,8 @@ class GlobalVariables {
       "before:invoke:local:invoke": this.init.bind(this, true),
 
       "global-variables:collect": this.collectGlobalVars.bind(this),
-      "global-variables:resolve": this.resolveEnvVars.bind(this),
-      "global-variables:write": this.writeEnvVars.bind(this),
+      "global-variables:resolve": this.resolveGlobalVars.bind(this),
+      "global-variables:write": this.writeGlobalVars.bind(this),
     };
 
     this.globalVariables = {};
@@ -85,7 +85,7 @@ class GlobalVariables {
     });
   }
 
-  resolveEnvVars() {
+  resolveGlobalVars() {
     // resolve environment variables referencing CloudFormation
     return resolveCloudFormationGlobalVariables(
       this.serverless,
@@ -95,7 +95,7 @@ class GlobalVariables {
       .return();
   }
 
-  writeEnvVars() {
+  writeGlobalVars() {
     return BPromise.try(() => {
       const params = _.get(this.serverless, "service.custom.global-variables");
 

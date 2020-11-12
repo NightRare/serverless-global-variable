@@ -29,6 +29,20 @@ function listStackResources(AWS, resources, nextToken) {
         return listStackResources(AWS, resources, response.NextToken);
       }
     })
+    .catch((e) => {
+      if (
+        e.message ===
+        `Stack with id ${AWS.naming.getStackName()} does not exist`
+      ) {
+        console.warn(
+          `{yellow {bold WARNNING: Failed to retrieve Stack Resources of this stack from Cloudformation.}}`
+        );
+        console.warn(
+          `{yellow {bold If this stack has not been created before, you need to deploy again to make sure the Outputs of this stack gets injected into this and other depended stacks. }}`
+        );
+      }
+      else throw e;
+    })
     .return(resources);
 }
 
