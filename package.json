@@ -1,5 +1,5 @@
 {
-  "name": "serverless-global-variables",
+  "name": "@tussock-innovation/serverless-global-variables",
   "version": "0.1.2",
   "description": "Serverless plugin to export a .json file including variables defined in serverless.yml and exported values from CloudFormation",
   "main": "src/index.js",
@@ -10,18 +10,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/NightRare/serverless-global-variables"
+    "url": "https://github.com/tussockinnovation/serverless-global-variables"
   },
   "bugs": {
-    "url": "https://github.com/NightRare/serverless-global-variables/issues"
+    "url": "https://github.com/tussockinnovation/serverless-global-variables/issues"
   },
-  "homepage": "https://github.com/NightRare/serverless-global-variables",
+  "homepage": "https://github.com/tussockinnovation/serverless-global-variables",
   "dependencies": {
     "bluebird": "^3.7.2",
     "chalk": "^4.1.0",
     "lodash": "^4.17.20"
   },
   "devDependencies": {},
+  "publishConfig": {
+    "access": "public"
+  },
   "prettier": {
     "printWidth": 80,
     "singleQuote": false
